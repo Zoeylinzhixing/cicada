@@ -36,7 +36,14 @@ This work is funded by the Eric and Wendy Schmidt foundation.
 ---
 ## Setup Environment
 
-We suggest using `conda` to setup the environment as follows:
+We suggest using `conda` to setup the environment with the commands below. Note: If you are working on lxplus (or a machine with limited home directory space) you should change the directory where the environment and added packages are stored, this can be done in the ```.condarc``` file by adding the following text.
+```
+pkgs_dirs:
+  - /afs/cern.ch/work/$USER/condapackages
+envs_dirs:
+  - /afs/cern.ch/work/$USER/condaenvs
+```
+Setup your conda environment as below. 
 ```
 conda create -n "cicada" python=3.9.16 numpy==1.26.0
 conda activate cicada
