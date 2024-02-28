@@ -53,7 +53,10 @@ def parse_arguments() -> dict:
         help="Path to config file",
     )
     args = parser.parse_args()
-    return yaml.safe_load(open(args.config))
+    if yaml.safe_load(open(args.config))
+        return yaml.safe_load(open(args.config))
+    else:
+        return []
 
 
 def main(args_in=None) -> None:
