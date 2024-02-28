@@ -24,10 +24,10 @@ background:
  #   use: True
 
 signal:
- # - path:
- #   - '/nfs_scratch/zxlin/cicada/inputs/h5/ntuple_ZeroBias_2023D.h5'
- #   name: 'ntuple ZeroBias 2023D'
- #   use: True
+ - path:
+   - '/nfs_scratch/zxlin/cicada/inputs/h5/ntuple_ZeroBias_2023D.h5'
+   name: 'ntuple ZeroBias 2023D'
+   use: False
  # - path:
  #   - '/eos/project/c/cicada-project/data/2023/Signal/H_ToLongLived.h5'
  #   name: 'HtoLongLived'
@@ -47,6 +47,6 @@ signal:
 
 exposure:
  training:
-  # - '/eos/project/c/cicada-project/data/2023/Signal/DummyOutliers-Training.h5'
+  - '/nfs_scratch/zxlin/cicada/inputs/h5/ntuple_ZeroBias_2023D.h5'
  validation:
-  # - '/eos/project/c/cicada-project/data/2023/Signal/DummyOutliers-Validation.h5'
+  - '/nfs_scratch/zxlin/cicada/inputs/h5/ntuple_ZeroBias_2023D.h5'
