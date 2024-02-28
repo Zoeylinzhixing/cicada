@@ -53,17 +53,14 @@ def parse_arguments() -> dict:
         help="Path to config file",
     )
     args = parser.parse_args()
-    if yaml.safe_load(open(args.config)):
-        return yaml.safe_load(open(args.config))
-    else:
-        return []
+    return yaml.safe_load(open(args.config))
 
 
 def main(args_in=None) -> None:
     config = parse_arguments()
     dataset_profiling(config["background"], "Background")
-    dataset_profiling(config["signal"], "Signal")
-    pprint_acceptance(config["signal"])
+    # dataset_profiling(config["signal"], "Signal")
+    # pprint_acceptance(config["signal"])
 
 
 if __name__ == "__main__":
