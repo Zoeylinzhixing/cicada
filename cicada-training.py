@@ -148,22 +148,22 @@ def run_training(
     cicada_v2 = keras.models.load_model("models/cicada-v2")
 
     # Comparison between original and reconstructed inputs
-    X_example = X_test[:1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="comparison-background",
-    )
-    X_example = X_signal["SUSYGGBBH"][:1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="comparison-signal",
-    )
+    # X_example = X_test[:1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="comparison-background",
+    # )
+    # X_example = X_signal["SUSYGGBBH"][:1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="comparison-signal",
+    # )
 
     # Evaluation
     y_pred_background_teacher = teacher.predict(X_test, batch_size=512, verbose=verbose)
