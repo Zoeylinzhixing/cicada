@@ -72,7 +72,9 @@ class RegionETGenerator:
                         "bool"
                     )
                     fraction = np.round(100 * sum(flags) / len(flags), 2)
-                except KeyError:
+                except ZeroDivisionError as err:
+                #except KeyError:
+                    print(err)
                     fraction = 100.0
                 if filter_acceptance:
                     X = X[flags]
