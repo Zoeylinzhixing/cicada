@@ -1,7 +1,7 @@
 ---
 background:
  - path:
-   - '/nfs_scratch/zxlin/cicada/inputs/h5/ntuple_ZeroBias_2023D.h5'
+   - '/nfs_scratch/zxlin/cicada/inputs/h5/background/ntuple_ZeroBias_2023D.h5'
    name: 'ntuple ZeroBias 2023D'
    use: True
  # - path: 
@@ -25,21 +25,17 @@ background:
 
 signal:
  - path:
-   - '/nfs_scratch/zxlin/cicada/inputs/h5/ntuple_ZeroBias_2023D.h5'
-   name: 'ntuple ZeroBias 2023D'
-   use: False
- # - path:
- #   - '/eos/project/c/cicada-project/data/2023/Signal/H_ToLongLived.h5'
- #   name: 'HtoLongLived'
- #   use: True
- # - path:
- #   - '/eos/project/c/cicada-project/data/2023/Signal/VBFHto2C.h5'
- #   name: 'VBHFto2C'
- #   use: True
- # - path:
- #   - '/eos/project/c/cicada-project/data/2023/Signal/TT.h5'
- #   name: 'TT' 
- #   use: True
+   - '/eos/project/c/cicada-project/data/2023/Signal/H_ToLongLived.h5'
+   name: 'HtoLongLived'
+   use: True
+ - path:
+   - '/eos/project/c/cicada-project/data/2023/Signal/VBFHto2C.h5'
+   name: 'VBHFto2C'
+   use: True
+ - path:
+   - '/eos/project/c/cicada-project/data/2023/Signal/TT.h5'
+   name: 'TT' 
+   use: True
  # - path:
  #   - '/eos/project/c/cicada-project/data/2023/Signal/SUSYGGBBH.h5'
  #   name: 'SUSYGGBBH'
