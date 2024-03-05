@@ -86,6 +86,7 @@ def run_training(
     outlier_val = gen.get_data(config["exposure"]["validation"])
 
     X_train_student = np.concatenate([X_train, outlier_train])
+    # TODO: should there be outlier_val?
     X_val_student = np.concatenate([X_val, outlier_train])
 
     if not eval_only:
