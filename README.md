@@ -60,7 +60,7 @@ If you still wish to convert the `root` files to `h5` yourself, you can do it as
 ```
 python3 convert-root-to-h5.py --calotree "HLTCaloTowers/Events" <source_root_directory> <save_path_prefix> 
 ```
-This script can be run using additional options. `--acceptance` will store acceptance information, i.e. if an event has at least one jet of minimum pT of 30 GeV in the central region. `-–split` will produce three additional files to help with train-validation-test split. **Mind that the `h5` files are prepared and stored already in `eos`.**
+This script can be run using additional options. `--acceptance` will store acceptance information, i.e. if an event has at least one jet of minimum pT of 30 GeV in the central region. `-–split` will produce three additional files to help with train-validation-test split (split is a bool input). **Mind that the `h5` files are prepared and stored already in `eos`.**
 
 ### Profiling
 You may wish to profile the dataset to spot potential problems, e.g. $E_T$, $\eta$ or $\phi$ distribution is corrupted. It also prints number of available samples, acceptance ratios. To run, execute the following:
