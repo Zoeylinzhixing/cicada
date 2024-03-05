@@ -56,9 +56,9 @@ python3 -m pip install -r misc/requirements.txt
 The data needed for running the scripts is available on `eos` under `/eos/project-c/cicada-project/`. The directory contains both `root` and `h5` files. To access these files, please contact admins at [cicada-project@cern.ch](mailto:cicada-project@cern.ch) with the title *Data access request for [Your Name]*.
 
 ### Converting ROOT to H5
-If you still wish to convert the `root` files to `h5` yourself, you can do it as follows:
+If you still wish to convert the `root` files to `h5` yourself, you can do it as follows: (Here we need to add an additional input for the calotree argument)
 ```
-python3 convert-root-to-h5.py <source_root_directory> <save_path_prefix>
+python3 convert-root-to-h5.py --calotree "HLTCaloTowers/Events" <source_root_directory> <save_path_prefix> 
 ```
 This script can be run using additional options. `--acceptance` will store acceptance information, i.e. if an event has at least one jet of minimum pT of 30 GeV in the central region. `-–split` will produce three additional files to help with train-validation-test split. **Mind that the `h5` files are prepared and stored already in `eos`.**
 
