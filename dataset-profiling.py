@@ -59,8 +59,8 @@ def parse_arguments() -> dict:
 def main(args_in=None) -> None:
     config = parse_arguments()
     dataset_profiling(config["background"], "Background")
-    # dataset_profiling(config["signal"], "Signal")
-    # pprint_acceptance(config["signal"])
+    dataset_profiling(config["signal"], "Signal")
+    pprint_acceptance(config["signal"])
 
 
 if __name__ == "__main__":
