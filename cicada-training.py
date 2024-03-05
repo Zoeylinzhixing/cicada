@@ -87,7 +87,7 @@ def run_training(
 
     X_train_student = np.concatenate([X_train, outlier_train])
     # TODO: should there be outlier_val?
-    X_val_student = np.concatenate([X_val, outlier_train])
+    X_val_student = np.concatenate([X_val, outlier_val])
 
     if not eval_only:
         teacher = TeacherAutoencoder((18, 14, 1)).get_model()
