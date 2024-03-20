@@ -145,7 +145,7 @@ def parse_arguments():
         "--calotree",
         help="Data tree",
         # default="l1CaloTowerEmuTree/L1CaloTowerTree/L1CaloTower",
-        default = "HLTCaloTowers/Events"
+        default = "HLTCaloTowers/Events",
         # TODO: change default path according to Wisconsin's cluster
         type=str,
     )
