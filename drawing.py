@@ -45,7 +45,7 @@ class Draw:
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel(r"Calorimeter E$_T$ deposit (GeV)")
         # plt.xticks(np.arange(14), labels=np.arange(4, 18))
-        plt.xticks(np.arange(56), labels=np.arange(16, 72))
+        plt.xticks(np.arange(56), labels=np.arange(0, 56, 4))
         # plt.yticks(
         #     np.arange(18),
         #     labels=np.arange(18)[::-1],
@@ -54,7 +54,7 @@ class Draw:
         # )
         plt.yticks(
             np.arange(72),
-            labels=np.arange(72)[::-1],
+            labels=np.arange(0, 72, 4)[::-1],
             rotation=90,
             va="center",
         )
@@ -76,11 +76,12 @@ class Draw:
             bins = np.argwhere(deposit)
             phi, eta = bins[:, 1], bins[:, 2]
             ax1.hist(
-                eta + 4,
+                # eta + 4,
+                eta
                 density=True,
                 facecolor=None,
                 # bins=np.arange(4, 19),
-                bins=np.arange(16, 76),
+                bins=np.arange(0, 57),
                 label=label,
                 histtype="step",
             )
@@ -89,7 +90,7 @@ class Draw:
                 density=True,
                 facecolor=None,
                 # bins=np.arange(19),
-                bins=np.arange(76),
+                bins=np.arange(73),
                 label=label,
                 histtype="step",
             )
