@@ -96,8 +96,8 @@ def convert(
 
         # Reduce to towers
         # region_et = block_reduce(deposits, (1, 4, 4), np.sum)
-        # region_et = np.where(region_et > 1023, 1023, region_et)
-        region_et = deposits
+        region_et = block_reduce(deposits, (1, 1, 1), np.sum)
+        region_et = np.where(region_et > 1023, 1023, region_et)
 
         # Save it in h5 file
         with h5py.File(save_path, "a") as h5f:
@@ -144,8 +144,8 @@ def parse_arguments():
     parser.add_argument(
         "--calotree",
         help="Data tree",
-        # default="l1CaloTowerEmuTree/L1CaloTowerTree/L1CaloTower",
-        default = "HLTCaloTowers/Events",
+        default="l1CaloTowerEmuTree/L1CaloTowerTree/L1CaloTower",
+        # default = "HLTCaloTowers/Events",
         # TODO: change default path according to Wisconsin's cluster
         type=str,
     )
