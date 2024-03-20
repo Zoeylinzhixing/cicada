@@ -39,15 +39,22 @@ class Draw:
 
     def plot_regional_deposits(self, deposits: npt.NDArray, mean: float, name: str):
         im = plt.imshow(
-            deposits.reshape(18, 14), vmin=0, vmax=deposits.max(), cmap="Purples"
+            deposits.reshape(72, 56), vmin=0, vmax=deposits.max(), cmap="Purples"
         )
         ax = plt.gca()
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel(r"Calorimeter E$_T$ deposit (GeV)")
-        plt.xticks(np.arange(14), labels=np.arange(4, 18))
+        # plt.xticks(np.arange(14), labels=np.arange(4, 18))
+        plt.xticks(np.arange(56), labels=np.arange(16, 72))
+        # plt.yticks(
+        #     np.arange(18),
+        #     labels=np.arange(18)[::-1],
+        #     rotation=90,
+        #     va="center",
+        # )
         plt.yticks(
-            np.arange(18),
-            labels=np.arange(18)[::-1],
+            np.arange(72),
+            labels=np.arange(72)[::-1],
             rotation=90,
             va="center",
         )
@@ -72,7 +79,8 @@ class Draw:
                 eta + 4,
                 density=True,
                 facecolor=None,
-                bins=np.arange(4, 19),
+                # bins=np.arange(4, 19),
+                bins=np.arange(16, 76),
                 label=label,
                 histtype="step",
             )
@@ -80,7 +88,8 @@ class Draw:
                 phi,
                 density=True,
                 facecolor=None,
-                bins=np.arange(19),
+                # bins=np.arange(19),
+                bins=np.arange(76),
                 label=label,
                 histtype="step",
             )
@@ -115,6 +124,8 @@ class Draw:
         )
         plt.close()
 
+
+    # TODO: fix for training purpose
     def plot_reconstruction_results(
         self,
         deposits_in: npt.NDArray,
