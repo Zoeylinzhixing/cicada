@@ -77,7 +77,7 @@ class Draw:
             phi, eta = bins[:, 1], bins[:, 2]
             ax1.hist(
                 # eta + 4,
-                eta
+                eta, 
                 density=True,
                 facecolor=None,
                 # bins=np.arange(4, 19),
