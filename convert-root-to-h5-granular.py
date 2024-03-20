@@ -144,11 +144,10 @@ def parse_arguments():
     parser.add_argument(
         "--calotree",
         help="Data tree",
-        default="l1CaloTowerEmuTree/L1CaloTowerTree/L1CaloTower",
-        # default = "HLTCaloTowers/Events",
-        # TODO: change default path according to Wisconsin's cluster
+        default="HLTCaloTowers/Events",
         type=str,
     )
+    # change default calotree path
     parser.add_argument(
         "--acceptance",
         help="Store acceptance flag",
