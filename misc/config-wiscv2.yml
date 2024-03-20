@@ -7,15 +7,15 @@ background:
 
 signal:
  - path:
-   - '/nfs_scratch/zxlin/cicada/inputs/h5/signal/ntuple_HTo2LongLivedTo4b_MH-125_MFF-25_CTau-1500mm.h5'
+   - '/nfs_scratch/zxlin/cicada/inputs/h5/v2/signal/ntuple_HTo2LongLivedTo4b_MH-125_MFF-25_CTau-1500mm.h5'
    name: 'HTo2LongLivedTo4b'
    use: True
  - path:
-   - '/nfs_scratch/zxlin/cicada/inputs/h5/signal/ntuple_RelValTTbar_SemiLeptonic.h5'
+   - '/nfs_scratch/zxlin/cicada/inputs/h5/v2/signal/ntuple_RelValTTbar_SemiLeptonic.h5'
    name: 'RelValTTbar_SemiLeptonic'
    use: True
  - path:
-   - '/nfs_scratch/zxlin/cicada/inputs/h5/signal/ntuple_VBFHToTauTau_M125.h5'
+   - '/nfs_scratch/zxlin/cicada/inputs/h5/v2/signal/ntuple_VBFHToTauTau_M125.h5'
    name: 'VBFHToTauTau' 
    use: True
 
