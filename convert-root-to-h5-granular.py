@@ -1,3 +1,4 @@
+
 import argparse
 import awkward as ak
 import h5py
@@ -95,7 +96,6 @@ def convert(
         deposits[ids, phi, eta] = et
 
         # Reduce to towers
-        # region_et = block_reduce(deposits, (1, 4, 4), np.sum)
         region_et = block_reduce(deposits, (1, 1, 1), np.sum)
         region_et = np.where(region_et > 1023, 1023, region_et)
 
@@ -105,7 +105,6 @@ def convert(
                 h5f.create_dataset(
                     "CaloRegions", data=region_et, maxshape=(None, 72, 56), chunks=True
                 )
-                # change from (18, 14) to (72, 56)
                 h5f.create_dataset(
                     "AcceptanceFlag", data=flags, maxshape=(None,), chunks=True
                 )
@@ -147,7 +146,6 @@ def parse_arguments():
         default="HLTCaloTowers/Events",
         type=str,
     )
-    # change default calotree path
     parser.add_argument(
         "--acceptance",
         help="Store acceptance flag",
@@ -161,7 +159,7 @@ def parse_arguments():
 
 
 def main(args_in=None) -> None:
-    args, config = parse_arguments()
+    args = parse_arguments()
     convert(args.filepath, args.savepath, args.calotree, args.acceptance, args.split)
 
 
