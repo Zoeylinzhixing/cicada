@@ -106,6 +106,7 @@ def run_training(
         cv2_log = CSVLogger(f"models/{cicada_v2.name}/training.log", append=True)
 
         for epoch in range(epochs):
+            print(f"epoch {epoch}")
             train_model(
                 teacher,
                 gen_train,
