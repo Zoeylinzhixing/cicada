@@ -95,15 +95,18 @@ def convert(
         # Calculate regional deposits
         deposits[ids, phi, eta] = et
 
-        # Reduce to towers
-        region_et = block_reduce(deposits, (1, 1, 1), np.sum)
+        # Original cicada: Reduce to towers
+        # region_et = block_reduce(deposits, (1, 1, 1), np.sum)
+
+        # Cut the forward region
+        region_et = deposits[:, :, 8:48]
         region_et = np.where(region_et > 1023, 1023, region_et)
 
         # Save it in h5 file
         with h5py.File(save_path, "a") as h5f:
             if create:
                 h5f.create_dataset(
-                    "CaloRegions", data=region_et, maxshape=(None, 72, 56), chunks=True
+                    "CaloRegions", data=region_et, maxshape=(None, 72, 40), chunks=True
                 )
                 h5f.create_dataset(
                     "AcceptanceFlag", data=flags, maxshape=(None,), chunks=True
