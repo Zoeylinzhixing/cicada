@@ -39,7 +39,7 @@ class RegionETGenerator:
             )
         X = np.concatenate(inputs)
         # X = np.reshape(X, (-1, 18, 14, 1))
-        X = np.reshape(X, (-1, 72, 56, 1))
+        X = np.reshape(X, (-1, 72, 40, 1))
         return X
 
     def get_data_split(
@@ -68,7 +68,7 @@ class RegionETGenerator:
             for dataset_path in dataset["path"]:
                 X = h5py.File(dataset_path, "r")["CaloRegions"][:].astype("float32")
                 # X = np.reshape(X, (-1, 18, 14, 1))
-                X = np.reshape(X, (-1, 72, 56, 1))
+                X = np.reshape(X, (-1, 72, 40, 1))
                 try:
                     flags = h5py.File(dataset_path, "r")["AcceptanceFlag"][:].astype(
                         "bool"
