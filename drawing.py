@@ -39,13 +39,13 @@ class Draw:
 
     def plot_regional_deposits(self, deposits: npt.NDArray, mean: float, name: str):
         im = plt.imshow(
-            deposits.reshape(72, 56), vmin=0, vmax=deposits.max(), cmap="Purples"
+            deposits.reshape(72, 40), vmin=0, vmax=deposits.max(), cmap="Purples"
         )
         ax = plt.gca()
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel(r"Calorimeter E$_T$ deposit (GeV)")
         # plt.xticks(np.arange(14), labels=np.arange(4, 18))
-        plt.xticks(np.arange(0, 57, 4), labels=np.arange(0, 57, 4))
+        plt.xticks(np.arange(8, 49, 4), labels=np.arange(8, 49, 4))
         # plt.yticks(
         #     np.arange(18),
         #     labels=np.arange(18)[::-1],
@@ -81,7 +81,7 @@ class Draw:
                 density=True,
                 facecolor=None,
                 # bins=np.arange(4, 19),
-                bins=np.arange(0, 57),
+                bins=np.arange(8, 48),
                 label=label,
                 histtype="step",
             )
