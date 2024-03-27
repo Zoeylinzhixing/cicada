@@ -81,7 +81,7 @@ class Draw:
                 density=True,
                 facecolor=None,
                 # bins=np.arange(4, 19),
-                bins=np.arange(8, 48),
+                bins=np.arange(8, 49),
                 label=label,
                 histtype="step",
             )
