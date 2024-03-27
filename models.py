@@ -19,7 +19,7 @@ class TeacherAutoencoder:
 
     def get_model(self):
         inputs = Input(shape=self.input_shape, name="teacher_inputs_")
-        x = Reshape(72, 40, 1), name="teacher_reshape")(inputs)
+        x = Reshape((72, 40, 1), name="teacher_reshape")(inputs)
         x = Conv2D(20, (3, 3), strides=1, padding="same", name="teacher_conv2d_1")(x)
         x = Activation("relu", name="teacher_relu_1")(x)
         x = AveragePooling2D((2, 2), name="teacher_pool_1")(x)
