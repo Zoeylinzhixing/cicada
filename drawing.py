@@ -126,7 +126,6 @@ class Draw:
         plt.close()
 
 
-    # TODO: fix for training purpose
     def plot_reconstruction_results(
         self,
         deposits_in: npt.NDArray,
@@ -144,7 +143,7 @@ class Draw:
         ax1.get_yaxis().set_visible(False)
         ax1.set_title("Original", fontsize=18)
         ax1.imshow(
-            deposits_in.reshape(18, 14), vmin=0, vmax=max_deposit, cmap="Purples"
+            deposits_in.reshape(72, 40), vmin=0, vmax=max_deposit, cmap="Purples"
         )
 
         ax2 = plt.subplot(1, 4, 2)
@@ -152,7 +151,7 @@ class Draw:
         ax2.get_yaxis().set_visible(False)
         ax2.set_title("Reconstructed", fontsize=18)
         ax2.imshow(
-            deposits_out.reshape(18, 14), vmin=0, vmax=max_deposit, cmap="Purples"
+            deposits_out.reshape(72, 40), vmin=0, vmax=max_deposit, cmap="Purples"
         )
 
         ax3 = plt.subplot(1, 4, 3)
@@ -161,7 +160,7 @@ class Draw:
         ax3.set_title(rf"|$\Delta$|, MSE: {loss: .2f}", fontsize=18)
 
         im = ax3.imshow(
-            np.abs(deposits_in - deposits_out).reshape(18, 14),
+            np.abs(deposits_in - deposits_out).reshape(72, 40),
             vmin=0,
             vmax=max_deposit,
             cmap="Purples",
