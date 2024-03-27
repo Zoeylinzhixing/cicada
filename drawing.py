@@ -45,7 +45,7 @@ class Draw:
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel(r"Calorimeter E$_T$ deposit (GeV)")
         # plt.xticks(np.arange(14), labels=np.arange(4, 18))
-        plt.xticks(np.arange(8, 49, 4), labels=np.arange(8, 49, 4))
+        plt.xticks(np.arange(0, 41, 4), labels=np.arange(8, 49, 4))
         # plt.yticks(
         #     np.arange(18),
         #     labels=np.arange(18)[::-1],
@@ -77,7 +77,7 @@ class Draw:
             phi, eta = bins[:, 1], bins[:, 2]
             ax1.hist(
                 # eta + 4,
-                eta, 
+                eta + 8, 
                 density=True,
                 facecolor=None,
                 # bins=np.arange(4, 19),
