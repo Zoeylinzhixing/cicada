@@ -24,9 +24,9 @@ def dataset_profiling(datasets: dict, prefix: str) -> None:
         X = generator.get_data(dataset["path"])
         print(f"{name} samples: {X.shape[0]}")
         draw.plot_regional_deposits(
-            np.mean(X, axis=0).reshape(72, 56), np.mean(X, axis=(0, 1, 2, 3)), name
+            np.mean(X, axis=0).reshape(72, 40), np.mean(X, axis=(0, 1, 2, 3)), name
         )
-        # change from 18, 14 to 72, 56
+        # change from 18, 14 to 72, 40
         deposits.append(X)
         labels.append(name)
     draw.plot_spacial_deposits_distribution(deposits, labels, name=f"{prefix}")
@@ -60,8 +60,8 @@ def parse_arguments() -> dict:
 def main(args_in=None) -> None:
     config = parse_arguments()
     dataset_profiling(config["background"], "Background")
-    # dataset_profiling(config["signal"], "Signal")
-    # pprint_acceptance(config["signal"])
+    dataset_profiling(config["signal"], "Signal")
+    pprint_acceptance(config["signal"])
 
 
 if __name__ == "__main__":
