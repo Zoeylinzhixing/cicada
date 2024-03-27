@@ -46,7 +46,7 @@ def get_student_targets(
     X_hat = teacher.predict(X, batch_size=512, verbose=0)
     y = loss(X, X_hat)
     y = quantize(np.log(y) * 32)
-    return gen.get_generator(X.reshape((-1, 252, 1)), y, 1024, True)
+    return gen.get_generator(X.reshape((-1, 2880, 1)), y, 1024, True)
 
 
 def train_model(
@@ -90,17 +90,17 @@ def run_training(
     X_val_student = np.concatenate([X_val, outlier_val])
 
     if not eval_only:
-        teacher = TeacherAutoencoder((18, 14, 1)).get_model()
+        teacher = TeacherAutoencoder((72, 40, 1)).get_model()
         teacher.compile(optimizer=Adam(learning_rate=0.001), loss="mse")
         t_mc = ModelCheckpoint(f"models/{teacher.name}", save_best_only=True)
         t_log = CSVLogger(f"models/{teacher.name}/training.log", append=True)
 
-        cicada_v1 = CicadaV1((252,)).get_model()
+        cicada_v1 = CicadaV1((2880,)).get_model()
         cicada_v1.compile(optimizer=Adam(learning_rate=0.001), loss="mae")
         cv1_mc = ModelCheckpoint(f"models/{cicada_v1.name}", save_best_only=True)
         cv1_log = CSVLogger(f"models/{cicada_v1.name}/training.log", append=True)
 
-        cicada_v2 = CicadaV2((252,)).get_model()
+        cicada_v2 = CicadaV2((2880,)).get_model()
         cicada_v2.compile(optimizer=Adam(learning_rate=0.001), loss="mae")
         cv2_mc = ModelCheckpoint(f"models/{cicada_v2.name}", save_best_only=True)
         cv2_log = CSVLogger(f"models/{cicada_v2.name}/training.log", append=True)
@@ -193,10 +193,10 @@ def run_training(
     y_pred_background_teacher = teacher.predict(X_test, batch_size=512, verbose=verbose)
     y_loss_background_teacher = loss(X_test, y_pred_background_teacher)
     y_loss_background_cicada_v1 = cicada_v1.predict(
-        X_test.reshape(-1, 252, 1), batch_size=512, verbose=verbose
+        X_test.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
     )
     y_loss_background_cicada_v2 = cicada_v2.predict(
-        X_test.reshape(-1, 252, 1), batch_size=512, verbose=verbose
+        X_test.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
     )
 
     results_teacher, results_cicada_v1, results_cicada_v2 = dict(), dict(), dict()
@@ -213,10 +213,10 @@ def run_training(
             data, teacher.predict(data, batch_size=512, verbose=verbose)
         )
         y_loss_cicada_v1 = cicada_v1.predict(
-            data.reshape(-1, 252, 1), batch_size=512, verbose=verbose
+            data.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
         )
         y_loss_cicada_v2 = cicada_v2.predict(
-            data.reshape(-1, 252, 1), batch_size=512, verbose=verbose
+            data.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
         )
         results_teacher[name] = y_loss_teacher
         results_cicada_v1[name] = y_loss_cicada_v1
