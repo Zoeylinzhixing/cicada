@@ -241,7 +241,7 @@ class Draw:
             )
         # modify the vertical line
         plt.plot(
-            [0.00003, 0.003],
+            [0.00003, 0.00003],
             [0, 1],
             linestyle="--",
             lw=1,
