@@ -239,16 +239,17 @@ class Draw:
                 alpha=0.5,
                 label=rf"{label}, Baseline",
             )
-
+        # modify the vertical line
         plt.plot(
-            [0.003, 0.003],
+            [0.00003, 0.003],
             [0, 1],
             linestyle="--",
             lw=1,
             color="black",
-            label="3 kHz",
+            label="30 Hz",
         )
-        plt.xlim([0.0002861, 28.61])
+        # include O(Hz) plot region
+        plt.xlim([0.0000002861, 28.61])
         plt.ylim([0.01, 1.0])
         plt.xscale("log")
         plt.yscale("log")
