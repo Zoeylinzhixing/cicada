@@ -84,31 +84,38 @@ class CicadaV2:
         inputs = Input(shape=self.input_shape, name="inputs_")
         x = Reshape((72, 40, 1), name="reshape")(inputs)
         x = QConv2D(
-            4,
-            (2, 2),
-            strides=2,
-            padding="valid",
+            32,
+            (5, 5),
+            strides=(1, 1),
+            padding="same",
             use_bias=False,
-            kernel_quantizer=quantized_bits(12, 3, 1, alpha=1.0),
-            name="conv",
+            kernel_quantizer=quantized_bits(8, 2, 1, alpha=1.0),
+            name="conv1",
         )(x)
-        x = QActivation("quantized_relu(10, 6)", name="relu0")(x)
+        x = QActivation("quantized_relu(8, 4)", name="relu0")(x)
         x = Flatten(name="flatten")(x)
-        x = Dropout(1 / 9)(x)
-        x = QDenseBatchnorm(
-            16,
-            kernel_quantizer=quantized_bits(8, 1, 1, alpha=1.0),
-            bias_quantizer=quantized_bits(8, 3, 1, alpha=1.0),
-            name="dense1",
+        x = QDense(
+            64,
+            use_bias=False,
+            kernel_quantizer=quantized_bits(8, 2, 1, alpha=1.0),
+            bias_quantizer=quantized_bits(8, 2, 1, alpha=1.0),
+            name="dense1"
         )(x)
-        x = QActivation("quantized_relu(10, 6)", name="relu1")(x)
-        x = Dropout(1 / 8)(x)
+        # x = Dropout(1 / 9)(x)
+        # x = QDenseBatchnorm(
+        #     16,
+        #     kernel_quantizer=quantized_bits(8, 1, 1, alpha=1.0),
+        #     bias_quantizer=quantized_bits(8, 3, 1, alpha=1.0),
+        #     name="dense1",
+        # )(x)
+        x = QActivation("quantized_relu(8, 4)", name="relu1")(x)
+        # x = Dropout(1 / 8)(x)
         x = QDense(
             1,
-            kernel_quantizer=quantized_bits(12, 3, 1, alpha=1.0),
+            kernel_quantizer=quantized_bits(8, 2, 1, alpha=1.0),
             use_bias=False,
             name="dense2",
         )(x)
-        outputs = QActivation("quantized_relu(16, 8)", name="outputs")(x)
+        outputs = QActivation("quantized_relu(8, 4)", name="outputs")(x)
         return Model(inputs, outputs, name="cicada-v2")
 
