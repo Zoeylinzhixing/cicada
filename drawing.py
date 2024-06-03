@@ -192,6 +192,7 @@ class Draw:
             )
         plt.xlabel(r"Anomaly Score")
         plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+        plt.title(f"{self._parse_name(name)}")
         plt.savefig(
             f"{self.output_dir}/{self._parse_name(name)}.png", bbox_inches="tight"
         )
@@ -256,6 +257,7 @@ class Draw:
         plt.xlabel("Trigger Rate (MHz)")
         plt.ylabel("Signal Efficiency")
         plt.legend(loc="center left", bbox_to_anchor=(1, 0.5))
+        plt.title(f"{self._parse_name(name)}")
         plt.savefig(
             f"{self.output_dir}/{self._parse_name(name)}.png", bbox_inches="tight"
         )
