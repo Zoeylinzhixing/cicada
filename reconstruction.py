@@ -81,190 +81,239 @@ def reconstruction(
     X_train, X_val, X_test = gen.get_data_split(datasets)
     print(X_test.shape)
     X_signal, _ = gen.get_benchmark(config["signal"], filter_acceptance=False)
-    # gen_train = gen.get_generator(X_train, X_train, 512, True)
-    # gen_val = gen.get_generator(X_val, X_val, 512)
-    # outlier_train = gen.get_data(config["exposure"]["training"])
-    # outlier_val = gen.get_data(config["exposure"]["validation"])
 
-    # X_train_student = np.concatenate([X_train, outlier_train])
-    # X_val_student = np.concatenate([X_val, outlier_val])
 
     teacher = keras.models.load_model("models/teacher")
-    # cicada_v1 = keras.models.load_model("models/cicada-v1")
-    # cicada_v2 = keras.models.load_model("models/cicada-v2")
 
     # Comparison between original and reconstructed inputs
     # background dataset
     # example 1: test data in the background
-    X_example = X_test[:1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-background_1",
-    )
-
-    # example 2: test data in the background
-    X_example = X_test[-1:]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-background_2",
-    )
-
-    # example 3: test data in the background
-    X_example = X_test[len(X_test)//2: len(X_test)//2+1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-background_3",
-    )
-
-    # example 4: test data in the background
-    X_example = X_test[len(X_test)//4: len(X_test)//4+1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-background_4",
-    )
-
-    # HTo2LongLivedTo4b
-    # example 1: signal data HTo2LongLivedTo4b
-    X_example = X_signal["HTo2LongLivedTo4b"][:1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-HTo2LongLivedTo4b_1",
-    )
-
-    # example 2: signal data HTo2LongLivedTo4b
-    X_example = X_signal["HTo2LongLivedTo4b"][-1:]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-HTo2LongLivedTo4b_2",
-    )
-
-    # RelValTTbar_SemiLeptonic
-    # example 1: signal data RelValTTbar_SemiLeptonic
-    X_example = X_signal["RelValTTbar_SemiLeptonic"][:1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-RelValTTbar_SemiLeptonic_1",
-    )
-
-    # example 2: signal data RelValTTbar_SemiLeptonic
-    X_example = X_signal["RelValTTbar_SemiLeptonic"][-1:]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-RelValTTbar_SemiLeptonic_2",
-    )
-
-
-    # VBFHToTauTau
-    # example 1: signal data VBFHToTauTau
-    X_example = X_signal["VBFHToTauTau"][:1]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="reconstruction-VBFHToTauTau_1",
-    )
-
-    # example 2: signal data VBFHToTauTau
-    X_example = X_signal["VBFHToTauTau"][-1:]
-    y_example = teacher.predict(X_example, verbose=verbose)
-    draw.plot_reconstruction_results(
-        X_example,
-        y_example,
-        loss=loss(X_example, y_example)[0],
-        name="comparison-VBFHToTauTau_2",
-    )
+    # X_example = X_test[:1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-background_1",
+    # )
+    #
+    # # example 2: test data in the background
+    # X_example = X_test[-1:]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-background_2",
+    # )
+    #
+    # # example 3: test data in the background
+    # X_example = X_test[len(X_test)//2: len(X_test)//2+1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-background_3",
+    # )
+    #
+    # # example 4: test data in the background
+    # X_example = X_test[len(X_test)//4: len(X_test)//4+1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-background_4",
+    # )
+    #
+    # # HTo2LongLivedTo4b
+    # # example 1: signal data HTo2LongLivedTo4b
+    # X_example = X_signal["HTo2LongLivedTo4b"][:1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-HTo2LongLivedTo4b_1",
+    # )
+    #
+    # # example 2: signal data HTo2LongLivedTo4b
+    # X_example = X_signal["HTo2LongLivedTo4b"][-1:]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-HTo2LongLivedTo4b_2",
+    # )
+    #
+    # # RelValTTbar_SemiLeptonic
+    # # example 1: signal data RelValTTbar_SemiLeptonic
+    # X_example = X_signal["RelValTTbar_SemiLeptonic"][:1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-RelValTTbar_SemiLeptonic_1",
+    # )
+    #
+    # # example 2: signal data RelValTTbar_SemiLeptonic
+    # X_example = X_signal["RelValTTbar_SemiLeptonic"][-1:]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-RelValTTbar_SemiLeptonic_2",
+    # )
+    #
+    #
+    # # VBFHToTauTau
+    # # example 1: signal data VBFHToTauTau
+    # X_example = X_signal["VBFHToTauTau"][:1]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="reconstruction-VBFHToTauTau_1",
+    # )
+    #
+    # # example 2: signal data VBFHToTauTau
+    # X_example = X_signal["VBFHToTauTau"][-1:]
+    # y_example = teacher.predict(X_example, verbose=verbose)
+    # draw.plot_reconstruction_results(
+    #     X_example,
+    #     y_example,
+    #     loss=loss(X_example, y_example)[0],
+    #     name="comparison-VBFHToTauTau_2",
+    # )
 
     # Evaluation
-    # y_pred_background_teacher = teacher.predict(X_test, batch_size=512, verbose=verbose)
-    # y_loss_background_teacher = loss(X_test, y_pred_background_teacher)
-    # y_loss_background_cicada_v1 = cicada_v1.predict(
-    #     X_test.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
-    # )
-    # y_loss_background_cicada_v2 = cicada_v2.predict(
-    #     X_test.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
-    # )
+    y_pred_background_teacher = teacher.predict(X_test, batch_size=512, verbose=verbose)
+    y_loss_background_teacher = loss(X_test, y_pred_background_teacher)
 
-    # results_teacher = dict()
-    # results_teacher["2023 Zero Bias (Test)"] = y_loss_background_teacher
-    # results_cicada_v1["2023 Zero Bias (Test)"] = y_loss_background_cicada_v1
-    # results_cicada_v2["2023 Zero Bias (Test)"] = y_loss_background_cicada_v2
+    results_teacher = dict()
+    results_teacher["2023 Zero Bias (Test)"] = y_loss_background_teacher
 
-    # y_true, y_pred_teacher = [], []
-    # inputs = []
-    # for name, data in X_signal.items():
-    #     inputs.append(np.concatenate((data, X_test)))
-    #
-    #     y_loss_teacher = loss(
-    #         data, teacher.predict(data, batch_size=512, verbose=verbose)
-    #     )
-    #     # y_loss_cicada_v1 = cicada_v1.predict(
-    #     #     data.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
-    #     # )
-    #     # y_loss_cicada_v2 = cicada_v2.predict(
-    #     #     data.reshape(-1, 2880, 1), batch_size=512, verbose=verbose
-    #     # )
-    #     results_teacher[name] = y_loss_teacher
-    #     # results_cicada_v1[name] = y_loss_cicada_v1
-    #     # results_cicada_v2[name] = y_loss_cicada_v2
-    #
-    #     y_true.append(
-    #         np.concatenate((np.ones(data.shape[0]), np.zeros(X_test.shape[0])))
-    #     )
-    #     y_pred_teacher.append(
-    #         np.concatenate((y_loss_teacher, y_loss_background_teacher))
-    #     )
-        # y_pred_cicada_v1.append(
-        #     np.concatenate((y_loss_cicada_v1, y_loss_background_cicada_v1))
-        # )
-        # y_pred_cicada_v2.append(
-        #     np.concatenate((y_loss_cicada_v2, y_loss_background_cicada_v2))
-        # )
+    # sort the loss
+    sort_index_background_teacher = np.argsort(y_loss_background_teacher)
 
-    # draw.plot_anomaly_score_distribution(
-    #     list(results_teacher.values()),
-    #     [*results_teacher],
-    #     "anomaly-score-teacher",
-    # )
-    # draw.plot_anomaly_score_distribution(
-    #     list(results_cicada_v1.values()),
-    #     [*results_cicada_v1],
-    #     "anomaly-score-cicada-v1",
-    # )
-    # draw.plot_anomaly_score_distribution(
-    #     list(results_cicada_v2.values()),
-    #     [*results_cicada_v2],
-    #     "anomaly-score-cicada-v2",
-    # )
+    # plot reconstruction according to loss
+    thresh_small = 4
+    thresh_large = 400
+    # large loss 1
+    event_index = sort_index_background_teacher[-1]
+    X_example = X_test[event_index: event_index + 1]
+    y_example = teacher.predict(X_example, verbose=verbose)
+    draw.plot_reconstruction_results(
+        X_example,
+        y_example,
+        loss=loss(X_example, y_example)[0],
+        name="reconstruction-background-large-loss-1",
+        max_deposit=thresh_large,
+    )
+    # large loss 2
+    event_index = sort_index_background_teacher[-2]
+    X_example = X_test[event_index:event_index + 1]
+    y_example = teacher.predict(X_example, verbose=verbose)
+    draw.plot_reconstruction_results(
+        X_example,
+        y_example,
+        loss=loss(X_example, y_example)[0],
+        name="reconstruction-background-large-loss-2",
+        max_deposit=thresh_large,
+    )
+    # small loss 1
+    event_index = sort_index_background_teacher[0]
+    X_example = X_test[event_index: event_index + 1]
+    y_example = teacher.predict(X_example, verbose=verbose)
+    draw.plot_reconstruction_results(
+        X_example,
+        y_example,
+        loss=loss(X_example, y_example)[0],
+        name="reconstruction-background-small-loss-1",
+        max_deposit=thresh_small,
+    )
+    # small loss 2
+    event_index = sort_index_background_teacher[1]
+    X_example = X_test[event_index: event_index + 1]
+    y_example = teacher.predict(X_example, verbose=verbose)
+    draw.plot_reconstruction_results(
+        X_example,
+        y_example,
+        loss=loss(X_example, y_example)[0],
+        name="reconstruction-background-small-loss-2",
+        max_deposit=thresh_small,
+    )
 
-    # ROC Curves with Cross-Validation
-    # draw.plot_roc_curve(y_true, y_pred_teacher, [*X_signal], inputs, "roc-teacher")
-    # draw.plot_roc_curve(y_true, y_pred_cicada_v1, [*X_signal], inputs, "roc-cicada-v1")
-    # draw.plot_roc_curve(y_true, y_pred_cicada_v2, [*X_signal], inputs, "roc-cicada-v2")
+    y_true, y_pred_teacher = [], []
+    inputs = []
+    for name, data in X_signal.items():
+        inputs.append(np.concatenate((data, X_test)))
+
+        y_loss_teacher = loss(
+            data, teacher.predict(data, batch_size=512, verbose=verbose)
+        )
+
+        results_teacher[name] = y_loss_teacher
+
+        # sort the loss
+        sort_index_teacher = np.argsort(y_loss_teacher)
+
+        # reconstruction plots
+        # large loss 1
+        event_index = sort_index_teacher[-1]
+        X_example = X_signal[name][event_index:event_index+1]
+        y_example = teacher.predict(X_example, verbose=verbose)
+        draw.plot_reconstruction_results(
+            X_example,
+            y_example,
+            loss=loss(X_example, y_example)[0],
+            name=f"reconstruction-{name}-large-loss-1",
+            max_deposit=thresh_large,
+        )
+
+        # large loss 2
+        event_index = sort_index_teacher[-2]
+        X_example = X_signal[name][event_index:event_index + 1]
+        y_example = teacher.predict(X_example, verbose=verbose)
+        draw.plot_reconstruction_results(
+            X_example,
+            y_example,
+            loss=loss(X_example, y_example)[0],
+            name=f"reconstruction-{name}-large-loss-2",
+            max_deposit=thresh_large,
+        )
+
+        # small loss 1
+        event_index = sort_index_teacher[0]
+        X_example = X_signal[name][event_index:event_index + 1]
+        y_example = teacher.predict(X_example, verbose=verbose)
+        draw.plot_reconstruction_results(
+            X_example,
+            y_example,
+            loss=loss(X_example, y_example)[0],
+            name=f"reconstruction-{name}-small-loss-1",
+            max_deposit=thresh_small,
+        )
+
+        # small loss 2
+        event_index = sort_index_teacher[1]
+        X_example = X_signal[name][event_index:event_index + 1]
+        y_example = teacher.predict(X_example, verbose=verbose)
+        draw.plot_reconstruction_results(
+            X_example,
+            y_example,
+            loss=loss(X_example, y_example)[0],
+            name=f"reconstruction-{name}-small-loss-2",
+            max_deposit=thresh_small,
+        )
+
+
+
 
 
 def parse_arguments():
