@@ -58,7 +58,7 @@ python3 -m pip install -r misc/requirements.txt
 The data needed for running the scripts is available on `eos` under `/eos/project-c/cicada-project/`. The directory contains both `root` and `h5` files. To access these files, please contact admins at [cicada-project@cern.ch](mailto:cicada-project@cern.ch) with the title *Data access request for [Your Name]*.
 
 ### Converting ROOT to H5
-The `convert-root-to-h5-granular.py` file helps convert root files into h5 files with desriable input format (72$\phi$ * 40$\eta$) in HLT.
+The `convert-root-to-h5-granular.py` file helps convert root files into h5 files with desriable input format (72 $\phi$ * 40 $\eta$) in HLT.
 ```
 python3 convert-root-to-h5-granular.py --calotree "HLTCaloTowers/Events" <source_root_directory> <save_path_prefix> 
 ```
