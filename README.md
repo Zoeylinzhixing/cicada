@@ -70,8 +70,9 @@ You may wish to profile the dataset to spot potential problems, e.g. $E_T$, $\et
 python3 dataset-profiling.py
 ```
 Fro sanity check, the profiling results for datasets in `misc/config-wisc.yml` are shown as follows: 
-<img style="float: center; height:80px" src="assets/profiling_1.png">
-<img style="float: center; height:80px" src="assets/profiling_2.png">
+<img style="float: center; height:160px" src="assets/profiling_1.png">
+
+<img style="float: center; height:160px" src="assets/profiling_2.png">
 
 ---
 ## Configuration
