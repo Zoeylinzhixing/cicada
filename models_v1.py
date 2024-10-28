@@ -24,7 +24,7 @@ class TeacherAutoencoder:
         # adding kernel regularization
         x = Conv2D(20, (3, 3), strides=1,
                    padding="same",
-                   kernel_regularizer=l2(0.01),
+                   kernel_regularizer=l2(0.02),
                    name="teacher_conv2d_1")(x)
         x = Activation("relu", name="teacher_relu_1")(x)
         x = AveragePooling2D((2, 2), name="teacher_pool_1")(x)
@@ -32,7 +32,7 @@ class TeacherAutoencoder:
         x = Activation("relu", name="teacher_relu_2")(x)
         x = Flatten(name="teacher_flatten")(x)
         x = Dense(80, activation="relu", name="teacher_latent")(x)
-        x = Dropout(1/8)(x)   # adding dropout layer
+        x = Dropout(1/7)(x)   # adding dropout layer
         x = Dense(36 * 20 * 30, name="teacher_dense")(x)
         x = Reshape((36, 20, 30), name="teacher_reshape2")(x)
         x = Activation("relu", name="teacher_relu_3")(x)
