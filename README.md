@@ -69,6 +69,10 @@ You may wish to profile the dataset to spot potential problems, e.g. $E_T$, $\et
 ```
 python3 dataset-profiling.py
 ```
+Fro sanity check, the profiling results for datasets in `misc/config-wisc.yml` are shown as follows: 
+<img style="float: center; height:80px" src="assets/profiling_1.png">
+<img style="float: center; height:80px" src="assets/profiling_2.png">
+
 ---
 ## Configuration
 In `misc/config-wisc.yml` you will find a configuration file used by most of the scripts throughout this repository. It contains data sources for background, signal and exposure datasets. The usage of these is controlled by `use` flag. Insted of editing the file, you could copy it and use a custom one using `--config` scripts.
