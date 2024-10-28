@@ -70,7 +70,7 @@ def train_model(
     )
 
 
-def run_training(
+def anomaly_score(
     config: dict, eval_only: bool, epochs: int = 100, verbose: bool = False
 ) -> None:
     draw = Draw()
@@ -191,7 +191,7 @@ def parse_arguments():
 
 def main(args_in=None) -> None:
     args, config = parse_arguments()
-    run_training(config, args.evaluate_only, epochs=args.epochs, verbose=args.verbose)
+    anomaly_score(config, args.evaluate_only, epochs=args.epochs, verbose=args.verbose)
 
 
 if __name__ == "__main__":
