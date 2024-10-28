@@ -13,7 +13,7 @@ import yaml
 
 from drawing import Draw
 from generator import RegionETGenerator
-from models import TeacherAutoencoder, CicadaV1, CicadaV2
+from models_v1 import TeacherAutoencoder, CicadaV1, CicadaV2
 from pathlib import Path
 from tensorflow import data
 from tensorflow import keras
