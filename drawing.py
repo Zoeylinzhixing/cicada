@@ -44,14 +44,7 @@ class Draw:
         ax = plt.gca()
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel(r"Calorimeter E$_T$ deposit (GeV)")
-        # plt.xticks(np.arange(14), labels=np.arange(4, 18))
         plt.xticks(np.arange(0, 41, 4), labels=np.arange(8, 49, 4))
-        # plt.yticks(
-        #     np.arange(18),
-        #     labels=np.arange(18)[::-1],
-        #     rotation=90,
-        #     va="center",
-        # )
         plt.yticks(
             np.arange(0, 73, 4),
             labels=np.arange(0, 73, 4)[::-1],
@@ -243,7 +236,7 @@ class Draw:
                 alpha=0.5,
                 label=rf"{label}, Baseline",
             )
-        # modify the vertical line
+        # add the reference frequency: 30Hz
         plt.plot(
             [0.00003, 0.00003],
             [0, 1],
@@ -252,7 +245,7 @@ class Draw:
             color="black",
             label="30 Hz",
         )
-        # include O(Hz) plot region
+        # set the plot region
         plt.xlim([0.0000002861, 28.61])
         plt.ylim([0.01, 1.0])
         plt.xscale("log")
