@@ -13,7 +13,7 @@ import yaml
 
 from drawing import Draw
 from generator import RegionETGenerator
-from models_v1 import TeacherAutoencoder, CicadaV1, CicadaV2
+from models import TeacherAutoencoder, CicadaV1, CicadaV2
 from pathlib import Path
 from tensorflow import data
 from tensorflow import keras
@@ -45,7 +45,8 @@ def get_student_targets(
 ) -> data.Dataset:
     X_hat = teacher.predict(X, batch_size=512, verbose=0)
     y = loss(X, X_hat)
-    y = quantize(np.log(y) * 32)
+    y = np.sqrt(y)
+    # y = quantize(np.log(y) * 512)
     return gen.get_generator(X.reshape((-1, 2880, 1)), y, 1024, True)
 
 
@@ -114,11 +115,11 @@ def run_training(
                 callbacks=[t_mc, t_log],
                 verbose=verbose,
             )
-
+            # print(f"The size of teacher training: {gen_train.cardinality().numpy()}")
             tmp_teacher = keras.models.load_model("models/teacher")
             s_gen_train = get_student_targets(tmp_teacher, gen, X_train_student)
             s_gen_val = get_student_targets(tmp_teacher, gen, X_val_student)
-
+            # print(f"The size of student training: {s_gen_train.cardinality().numpy()}")
             train_model(
                 cicada_v1,
                 s_gen_train,
