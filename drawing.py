@@ -111,7 +111,7 @@ class Draw:
             plt.hist(
                 deposit.reshape((-1)),
                 bins=100,
-                range=(0, 1024),
+                range=(0, 10),
                 density=1,
                 label=label,
                 log=True,
@@ -120,7 +120,7 @@ class Draw:
         plt.xlabel(r"E$_T$")
         plt.legend(loc="best")
         plt.savefig(
-            f"{self.output_dir}/profiling-deposits-{self._parse_name(name)}.png",
+            f"{self.output_dir}/profiling-deposits-zoomin-{self._parse_name(name)}.png",
             bbox_inches="tight",
         )
         plt.close()
@@ -178,13 +178,13 @@ class Draw:
         plt.close()
 
     def plot_anomaly_score_distribution(
-            self, scores: List[npt.NDArray], labels: List[str], name: str, max_anomaly: float=64,
+        self, scores: List[npt.NDArray], labels: List[str], name: str
     ):
         for score, label in zip(scores, labels):
             plt.hist(
                 score.reshape((-1)),
                 bins=100,
-                range=(0, max_anomaly),
+                range=(0, 60),
                 density=1,
                 label=label,
                 log=True,
