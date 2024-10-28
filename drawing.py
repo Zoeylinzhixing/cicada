@@ -178,13 +178,13 @@ class Draw:
         plt.close()
 
     def plot_anomaly_score_distribution(
-        self, scores: List[npt.NDArray], labels: List[str], name: str
+            self, scores: List[npt.NDArray], labels: List[str], name: str, max_anomaly: float=64,
     ):
         for score, label in zip(scores, labels):
             plt.hist(
                 score.reshape((-1)),
                 bins=100,
-                range=(0, 256),
+                range=(0, max_anomaly),
                 density=1,
                 label=label,
                 log=True,
