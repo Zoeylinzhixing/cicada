@@ -44,7 +44,14 @@ class Draw:
         ax = plt.gca()
         cbar = ax.figure.colorbar(im, ax=ax)
         cbar.ax.set_ylabel(r"Calorimeter E$_T$ deposit (GeV)")
+        # plt.xticks(np.arange(14), labels=np.arange(4, 18))
         plt.xticks(np.arange(0, 41, 4), labels=np.arange(8, 49, 4))
+        # plt.yticks(
+        #     np.arange(18),
+        #     labels=np.arange(18)[::-1],
+        #     rotation=90,
+        #     va="center",
+        # )
         plt.yticks(
             np.arange(0, 73, 4),
             labels=np.arange(0, 73, 4)[::-1],
@@ -104,7 +111,7 @@ class Draw:
             plt.hist(
                 deposit.reshape((-1)),
                 bins=100,
-                range=(0, 10),
+                range=(0, 1024),
                 density=1,
                 label=label,
                 log=True,
@@ -113,7 +120,7 @@ class Draw:
         plt.xlabel(r"E$_T$")
         plt.legend(loc="best")
         plt.savefig(
-            f"{self.output_dir}/profiling-deposits-zoomin-{self._parse_name(name)}.png",
+            f"{self.output_dir}/profiling-deposits-{self._parse_name(name)}.png",
             bbox_inches="tight",
         )
         plt.close()
@@ -125,11 +132,14 @@ class Draw:
         deposits_out: npt.NDArray,
         loss: float,
         name: str,
+        max_deposit: float = None,
     ):
         fig, (ax1, ax2, ax3, cax) = plt.subplots(
             ncols=4, figsize=(15, 10), gridspec_kw={"width_ratios": [1, 1, 1, 0.05]}
         )
-        max_deposit = max(deposits_in.max(), deposits_out.max())
+
+        if max_deposit is None:
+            max_deposit = max(deposits_in.max(), deposits_out.max())
 
         ax1 = plt.subplot(1, 4, 1)
         ax1.get_xaxis().set_visible(False)
@@ -171,13 +181,13 @@ class Draw:
         plt.close()
 
     def plot_anomaly_score_distribution(
-        self, scores: List[npt.NDArray], labels: List[str], name: str
+        self, scores: List[npt.NDArray], labels: List[str], name: str, max_anomaly: float = 64,
     ):
         for score, label in zip(scores, labels):
             plt.hist(
                 score.reshape((-1)),
                 bins=100,
-                range=(0, 60),
+                range=(0, max_anomaly),
                 density=1,
                 label=label,
                 log=True,
@@ -233,7 +243,7 @@ class Draw:
                 alpha=0.5,
                 label=rf"{label}, Baseline",
             )
-        # add the reference frequency: 30Hz
+        # modify the vertical line
         plt.plot(
             [0.00003, 0.00003],
             [0, 1],
@@ -242,7 +252,7 @@ class Draw:
             color="black",
             label="30 Hz",
         )
-        # set the plotting region
+        # include O(Hz) plot region
         plt.xlim([0.0000002861, 28.61])
         plt.ylim([0.01, 1.0])
         plt.xscale("log")
